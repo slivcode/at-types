@@ -22,7 +22,7 @@ warning No license field
 ✨  Done in 1.43s.
 ```
 
-the list of `@types/*` were fetched from [`npms.io`](https://npms.io) 's api when the package is published, available at [here](https://unpkg.com/at-imports/at-types-list.json) or under the project root `at-types-list.json`
+the list of `@types/*` were fetched from [`npms.io`](https://npms.io) 's api when the package is published, available at [here](https://unpkg.com/at-types/at-types-list.json) or under the project root `at-types-list.json`
 
 you can run `at-types update` to update the `@types/*` available.
 
