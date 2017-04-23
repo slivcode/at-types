@@ -1,6 +1,6 @@
 {
   "name": "at-types",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "automatically install all @types/* from project's package.json.",
   "keywords": [
     "@types",
