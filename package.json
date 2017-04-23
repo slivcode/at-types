@@ -3,23 +3,31 @@
   "version": "0.0.1",
   "description": "automatically install all @types/* from project's package.json.",
   "keywords": [
-    "cli",
-    "typescript",
     "@types",
+    "cli",
     "install",
-    "typings",
-    "tsd"
+    "tsd",
+    "typescript",
+    "typings"
   ],
-  "bin": {
-    "at-types": "lib/main/cli.js"
+  "homepage": "https://github.com/slivcode/at-types#readme",
+  "bugs": {
+    "url": "https://github.com/slivcode/at-types/issues"
   },
   "license": "MIT",
   "author": "sliv <sliv.mbp@gmail.com>",
   "main": "index.js",
+  "bin": {
+    "at-types": "lib/main/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slivcode/at-types.git"
+  },
   "scripts": {
-    "clean": "rm -rf lib",
     "build": "tsc && chmod +x lib/main/cli.js",
-    "prepublishOnly": "npm run"
+    "clean": "rm -rf lib",
+    "prepublishOnly": "npm run clean && npm run build"
   },
   "dependencies": {
     "@types/node": "^7.0.13",
