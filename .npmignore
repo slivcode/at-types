@@ -1,5 +1,6 @@
 .*
-*.json
+tsconfig.json
+tslint.json
 *.lock
 *.log
 src
