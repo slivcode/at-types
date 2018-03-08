@@ -18,13 +18,16 @@ let runCmdAsync = async (cmd: string) => {
 };
 let atTypesStr = '@types/';
 let addAtTypeIfNotExist = k => k.startsWith(atTypesStr) ? k : atTypesStr + k;
-let installCmd = (cmdType) => async (pkgNames: string[]) => {
+let installCmd = (cmdType, dev) => async (pkgNames: string[]) => {
 	let cmd = `${cmdType} ${pkgNames.map(addAtTypeIfNotExist).join(' ')}`;
+	if (dev) {
+		cmd += ' --dev';
+	}
 	V.log('executing', cmd);
 	return await runCmdAsync(cmd);
 };
-let yarnAddAtTypesPkg = installCmd('yarn add');
-let npmInstallAtTypesPkg = installCmd('npm install');
+let yarnAddAtTypesPkg = (dev) => installCmd('yarn add', dev);
+let npmInstallAtTypesPkg = (dev) => installCmd('npm install', dev);
 let getAllDepsFromPkgJson = R.pipe(
 	R.toPairs,
 	R.filter(([k]) => k.toLowerCase().indexOf('dependencies') !== -1),
@@ -39,9 +42,10 @@ let V = Vorpal();
 V.command('install [pkgs...]', 'install @types package')
 	.alias('i')
 	.option('-e, --engine <engine>', '[yarn]|[npm] for installation default yarn')
+	.option('-d, --dev', 'install packages as development dependencies')
 	.action(async (arg, cb) => {
-		let { pkgs, options: { engine = 'yarn' } } = arg;
-		let installer = engine === 'yarn' ? yarnAddAtTypesPkg : npmInstallAtTypesPkg;
+		let { pkgs, options: { engine = 'yarn', dev } } = arg;
+		let installer = engine === 'yarn' ? yarnAddAtTypesPkg(dev) : npmInstallAtTypesPkg(dev);
 		if (pkgs) {
 			await installer(pkgs);
 			cb();
